@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-//@RequestMapping("/api/contacts")
+@RequestMapping("/api/contacts")
 public class ContactController {
 
     @Autowired
@@ -29,7 +29,7 @@ public class ContactController {
     }
 
 
-    @GetMapping("/contacts")
+    @GetMapping
     public List<Contact> getContactsNotProcessed() {
         return contactService.getContactsNotProcessed();
     }
