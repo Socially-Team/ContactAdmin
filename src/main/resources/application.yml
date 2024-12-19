@@ -7,3 +7,5 @@ spring:
       uri: mongodb+srv://til202100:12345@cluster0.k7iml.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
 server:
   port: 8084
+
+SECRET_KEY: mySecretKey
