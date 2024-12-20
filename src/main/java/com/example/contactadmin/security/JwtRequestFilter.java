@@ -5,6 +5,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.impl.DefaultClaims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.List;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter {
@@ -59,7 +61,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             Long userId = claims.get("userId", Long.class);
             String email = claims.get("email", String.class);
             String role = claims.get("role", String.class);
-
+            System.out.println(role);
             UserPrinciple principal = UserPrinciple.builder()
                     .userId(userId)
                     .username(username)
@@ -68,8 +70,12 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                     .build();
 
             /* make Authentication object */
+            List<SimpleGrantedAuthority> authorities = List.of(new SimpleGrantedAuthority("ROLE_" + role));
             UsernamePasswordAuthenticationToken authentication =
-                    new UsernamePasswordAuthenticationToken(principal, null, Collections.emptyList());
+                    new UsernamePasswordAuthenticationToken(principal, null, authorities);
+            /*UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(principal, null, Collections.emptyList());*/
+
             /* set Authentication object to SC*/
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }catch (Exception e){

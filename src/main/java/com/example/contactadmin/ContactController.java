@@ -1,6 +1,7 @@
 package com.example.contactadmin;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +13,9 @@ public class ContactController {
     @Autowired
     private ContactService contactService;
 
-    @PostMapping("/api/contacts")
+    @PostMapping
     public Contact saveContact(@RequestBody Contact contact) {
+        contact.setStatus("Unprocessed");
         return contactService.saveContact(contact); // Save and return the contact
     }
 
@@ -29,6 +31,7 @@ public class ContactController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
     public List<Contact> getContactsNotProcessed() {
         return contactService.getContactsNotProcessed();

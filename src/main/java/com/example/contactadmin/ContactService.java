@@ -27,14 +27,14 @@ public class ContactService {
     public Contact saveContact(Contact contact) {
 
         Contact c =contactRepository.save(contact);
-        Map<String, String> message = new HashMap<>();
+        /*Map<String, String> message = new HashMap<>();
         message.put("outEmail", contact.getEmail());
         message.put("subject", contact.getSubject());
         message.put("body", contact.getMessage());
 
         amqpTemplate.convertAndSend("email_exchange", "email.generalized", message);
         System.out.println("Email published to RabbitMQ.");
-
+*/
         return c;
     }
 
