@@ -12,12 +12,9 @@ spring:
       uri: mongodb+srv://til202100:12345@cluster0.k7iml.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
   # for cloud only
   rabbitmq:
-    host: contact-admin-mq.us-east-1.amazonaws.com
+    host: b-5aca491e-88bf-4bb4-9411-b1b8d873f2e9.mq.us-east-1.amazonaws.com
     port: 5671
     username: admin
     password: SociallyGroupProjectDBPasswordQWE
     ssl:
       enabled: true
-
-
-
