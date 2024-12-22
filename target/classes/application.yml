@@ -18,6 +18,3 @@ spring:
     password: SociallyGroupProjectDBPasswordQWE
     ssl:
       enabled: true
-
-
-
